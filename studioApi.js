@@ -47,9 +47,11 @@ function receivedMessage(event) {
       ];
 
       sendResponse(senderID, quickHours(hours));
+      break;
 
     default:
       sendTextMessage(senderID, messageText);
+      break;
   }
   // if (messageText) {
   //   switch (messageText) {
