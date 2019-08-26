@@ -71,11 +71,11 @@ function sendGetStarted(recipientId) {
           template_type: "button",
           text: "How can I help you today?",
           buttons: [{
-            type: "studio_time",
+            type: "postback",
             title: "Reserve Studio Time",
             payload: "studio_time"
           }, {
-            type: "cancel_reservation",
+            type: "postback",
             title: "Cancel Reservation",
             payload: "cancel_reservation"
           }]
