@@ -41,9 +41,9 @@ function receivedMessage(event) {
   switch (payload) {
     case 'll':
       const hours = [
-        moment().startOf('day'),
-        moment().startOf('day').add(2, 'hours'),
-        moment().startOf('day').add(4, 'hours')
+        moment().startOf('day').add(8, 'hours'),
+        moment().startOf('day').add(10, 'hours'),
+        moment().startOf('day').add(12, 'hours')
       ];
 
       sendResponse(senderID, quickHours(hours));
