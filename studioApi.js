@@ -1,6 +1,6 @@
 const request = require('request');
 
-export function receivedMessage(event) {
+function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -20,7 +20,7 @@ export function receivedMessage(event) {
   }
 }
 
-export function receivedPostback(event) {
+function receivedPostback(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
@@ -44,7 +44,7 @@ export function receivedPostback(event) {
   }
 }
 
-export function sendTextMessage(recipientId, messageText) {
+function sendTextMessage(recipientId, messageText) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -57,7 +57,7 @@ export function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-export function sendGetStarted(recipientId) {
+function sendGetStarted(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -84,7 +84,7 @@ export function sendGetStarted(recipientId) {
   callSendAPI(messageData);
 }
 
-export function callSendAPI(messageData) {
+function callSendAPI(messageData) {
   console.log(messageData);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -109,3 +109,5 @@ export function callSendAPI(messageData) {
     }
   });
 }
+
+module.exports = { receivedMessage, receivedPostback }
