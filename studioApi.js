@@ -1,5 +1,6 @@
 const request = require('request');
 const moment = require('moment');
+const _ = require('lodash');
 
 const quickDays = days => {
   return momentQuickReplies(days, 'll', 'Which day?');
@@ -28,7 +29,8 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
-  const payload = event.payload;
+  const payload = _.get(event, 'quick_reply.payload', '');
+
 
   console.log("Received message for user %d and page %d at %d with payload %d message:",
     senderID, recipientID, timeOfMessage, payload);
