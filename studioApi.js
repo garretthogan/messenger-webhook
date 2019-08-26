@@ -1,25 +1,17 @@
 const request = require('request');
 const moment = require('moment');
 
-const quickReserveOptions = {
-  "messaging_type": "RESPONSE",
-  "message": {
-    "text": "Pick a color:",
-    "quick_replies": [
-      {
+const dayQuickReplies = days => {
+  return {
+    "messaging_type": "RESPONSE",
+    "message": {
+      "text": "Pick a day:",
+      "quick_replies": days.map(day => ({
         "content_type": "text",
-        "title": moment().add(1, 'days').format('ll'),
-        "payload": "<POSTBACK_PAYLOAD>",
-      }, {
-        "content_type": "text",
-        "title": moment().add(2, 'days').format('ll'),
-        "payload": "<POSTBACK_PAYLOAD>",
-      }, {
-        "content_type": "text",
-        "title": moment().add(3, 'days').format('ll'),
-        "payload": "<POSTBACK_PAYLOAD>",
-      }
-    ]
+        "title": day,
+        "payload": day,
+      }))
+    }
   }
 }
 
@@ -57,7 +49,12 @@ function receivedPostback(event) {
       sendGetStarted(senderID);
       break;
     case 'studio_time':
-      sendResponse(senderID, quickReserveOptions);
+      const days = [
+        moment().add(1, 'days').format('ll'),
+        moment().add(2, 'days').format('ll'),
+        moment().add(3, 'days').format('ll')
+      ]
+      sendResponse(senderID, dayQuickReplies(days));
       break;
     case 'cancel_reservation':
       sendTextMessage(senderID, "Cancel Reservation");
