@@ -1,9 +1,6 @@
 const request = require('request');
 
 const quickReserveOptions = {
-  "recipient": {
-    "id": "<PSID>"
-  },
   "messaging_type": "RESPONSE",
   "message": {
     "text": "Pick a color:",
@@ -57,7 +54,7 @@ function receivedPostback(event) {
       sendGetStarted(senderID);
       break;
     case 'studio_time':
-      sendTextMessage(senderID, quickReserveOptions);
+      sendResponse(senderID, quickReserveOptions);
       break;
     case 'cancel_reservation':
       sendTextMessage(senderID, "Cancel Reservation");
@@ -65,6 +62,12 @@ function receivedPostback(event) {
     default:
       sendTextMessage(senderID, "Postback called");
   }
+}
+
+function sendResponse(recipientID, data) {
+  const message = { recipient: { id: recipientID }, ...data }
+
+  callSendAPI(message);
 }
 
 function sendTextMessage(recipientId, messageText) {
