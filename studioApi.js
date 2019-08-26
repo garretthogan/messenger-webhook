@@ -7,7 +7,7 @@ const quickDays = days => {
 }
 
 const quickHours = hours => {
-  return momentQuickReplies(hours, 'h', 'What time?');
+  return momentQuickReplies(hours, 'h a', 'What time?');
 }
 
 const momentQuickReplies = (moments, format, responseMessage) => {
