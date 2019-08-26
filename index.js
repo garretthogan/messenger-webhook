@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 // Imports dependencies and set up http server
 const
   express = require('express'),
@@ -40,7 +42,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  const VERIFY_TOKEN = 'test_token';
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
   // Parse the query params
   const mode = req.query['hub.mode'];
