@@ -30,8 +30,8 @@ function receivedMessage(event) {
   var message = event.message;
   const payload = event.payload;
 
-  console.log("Received message for user %d and page %d at %d with message:",
-    senderID, recipientID, timeOfMessage);
+  console.log("Received message for user %d and page %d at %d with payload %d message:",
+    senderID, recipientID, timeOfMessage, payload);
   console.log(JSON.stringify(message));
 
   var messageText = message.text;
