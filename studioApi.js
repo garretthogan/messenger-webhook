@@ -1,5 +1,28 @@
 const request = require('request');
 
+const quickReserveOptions = {
+  "recipient": {
+    "id": "<PSID>"
+  },
+  "messaging_type": "RESPONSE",
+  "message": {
+    "text": "Pick a color:",
+    "quick_replies": [
+      {
+        "content_type": "text",
+        "title": "Red",
+        "payload": "<POSTBACK_PAYLOAD>",
+        "image_url": "http://example.com/img/red.png"
+      }, {
+        "content_type": "text",
+        "title": "Green",
+        "payload": "<POSTBACK_PAYLOAD>",
+        "image_url": "http://example.com/img/green.png"
+      }
+    ]
+  }
+}
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -34,7 +57,7 @@ function receivedPostback(event) {
       sendGetStarted(senderID);
       break;
     case 'studio_time':
-      sendTextMessage(senderID, "Reserve Studio Time");
+      sendTextMessage(senderID, quickReserveOptions);
       break;
     case 'cancel_reservation':
       sendTextMessage(senderID, "Cancel Reservation");
