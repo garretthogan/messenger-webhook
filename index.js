@@ -46,6 +46,19 @@ function receivedPostback(event) {
   }
 }
 
+function sendTextMessage(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+  callSendAPI(messageData);
+}
+
 function sendGetStarted(recipientId) {
   var messageData = {
     recipient: {
