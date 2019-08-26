@@ -1,15 +1,15 @@
 const request = require('request');
 const moment = require('moment');
 
-const dayQuickReplies = days => {
+const momentQuickReplies = (moments, format) => {
   return {
     "messaging_type": "RESPONSE",
     "message": {
       "text": "Pick a day:",
-      "quick_replies": days.map(day => ({
+      "quick_replies": moments.map(m => ({
         "content_type": "text",
-        "title": day,
-        "payload": day,
+        "title": m.format(format),
+        "payload": m.format(format),
       }))
     }
   }
@@ -50,11 +50,12 @@ function receivedPostback(event) {
       break;
     case 'studio_time':
       const days = [
-        moment().add(1, 'days').format('ll'),
-        moment().add(2, 'days').format('ll'),
-        moment().add(3, 'days').format('ll')
-      ]
-      sendResponse(senderID, dayQuickReplies(days));
+        moment().add(1, 'days'),
+        moment().add(2, 'days'),
+        moment().add(3, 'days')
+      ];
+
+      sendResponse(senderID, momentQuickReplies(days, 'll'));
       break;
     case 'cancel_reservation':
       sendTextMessage(senderID, "Cancel Reservation");
