@@ -1,4 +1,5 @@
 const request = require('request');
+const moment = require('moment');
 
 const quickReserveOptions = {
   "messaging_type": "RESPONSE",
@@ -7,14 +8,16 @@ const quickReserveOptions = {
     "quick_replies": [
       {
         "content_type": "text",
-        "title": "Red",
+        "title": moment().add(1, 'days').format('ll'),
         "payload": "<POSTBACK_PAYLOAD>",
-        "image_url": "http://example.com/img/red.png"
       }, {
         "content_type": "text",
-        "title": "Green",
+        "title": moment().add(2, 'days').format('ll'),
         "payload": "<POSTBACK_PAYLOAD>",
-        "image_url": "http://example.com/img/green.png"
+      }, {
+        "content_type": "text",
+        "title": moment().add(3, 'days').format('ll'),
+        "payload": "<POSTBACK_PAYLOAD>",
       }
     ]
   }
