@@ -29,7 +29,7 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
-  const payload = _.get(event, 'quick_reply.payload', '');
+  const payload = _.get(event, 'message.quick_reply.payload', '');
 
 
   console.log("Received message for user %d and page %d at %d with payload %d message:",
